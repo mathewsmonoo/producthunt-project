@@ -5,11 +5,21 @@ from django.contrib import auth
 
 # Create your views here.
 def login(request):
+    if request.method=='POST':
+        user = auth.authenticate(username=request.POST['username'],password=request.POST['password'])
+        if user is not None:
+            auth.login(request,user)
+            return redirect('home')
+        else:
+            return render(request,'accounts/login.html',{'error':'Username or password is incorrect!'})
+
     return render(request,'accounts/login.html')
 
 def logout(request):
-    #TODO NEEDS ROUTING TO HOMEPAGE
-    return render(request,'accounts/signup.html')
+    #LOGOUT SHOULD BE PUT AS A POST REQUEST
+    if request.method == 'POST':
+        auth.logout(request)
+        return redirect('home')
 
 def signup(request):
     if request.method=='POST':

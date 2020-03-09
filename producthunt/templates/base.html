@@ -27,6 +27,10 @@
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
             crossorigin="anonymous"
         />
+        <link
+        href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css' %}"
+        rel="stylesheet"
+        />
         <!-- Favicons -->
         <link
             rel="apple-touch-icon"
@@ -83,8 +87,13 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
                     <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="{% static 'logo.png' %}" height=35 width=35 class="d-inline-block align-top rounded">
-                    Product Hunt
+                        <img
+                            src="{% static 'logo.png' %}"
+                            height="35"
+                            width="35"
+                            class="d-inline-block align-top rounded"
+                        />
+                        Product Hunt
                     </a>
                     <button
                         class="navbar-toggler"
@@ -99,12 +108,38 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ml-auto">
+                            {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href="">Sign Up</a>
+                                <a class="nav-link" href="{% url 'create' %}" title="Add new Product"
+                                    ><span class="oi oi-plus"></span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">Login</a>
+                                <a
+                                    class="nav-link"
+                                    href="javascript:{document.getElementById('logout').submit()}"
+                                    >Logout</a
+                                >
+                                <form
+                                    id="logout"
+                                    method="POST"
+                                    action="{% url 'logout' %}"
+                                >
+                                    {% csrf_token %}
+                                    <input type="hidden" />
+                                </form>
                             </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'signup' %}"
+                                    >Sign Up</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}"
+                                    >Login</a
+                                >
+                            </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
