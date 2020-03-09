@@ -16,12 +16,11 @@ class Product(models.Model):
         return self.pub_date.strftime('%b %e, %Y')
 
     def summary(self):
-        if len(self.body) > 100:
-            return self.body[:100] + '(...)'
+        if len(self.body) > 150:
+            return self.body[:150] + '(...)'
         else:
             return self.body
 
     def __str__(self):
         return (self.title)
 
-    #hunter

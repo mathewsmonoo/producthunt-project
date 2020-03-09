@@ -1,7 +1,4 @@
-{% extends 'base.html' %} 
-{% block content %}
-{% if error %}
-{{ error }}
+{% extends 'base.html' %} {% block content %} {% if error %} {{ error }}
 <br />
 <br />
 {% endif %}
@@ -9,14 +6,13 @@
 <h1>Create New Product</h1>
 
 <form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
-    {% csrf_token %} 
-    Title:
+    {% csrf_token %} Title:
     <br />
     <input type="text" name="title" placeholder="Product Title" />
     <br />
     Body:
     <br />
-    <input type="textbox" name="body" />
+    <input type="text" name="body" />
     <br />
     URL:
     <br />
@@ -24,11 +20,11 @@
     <br />
     Icon:
     <br />
-    <input type="file" name="icon"/>
+    <input type="file" name="icon" />
     <br />
     Image:
     <br />
-    <input type="file" name="image"/>
+    <input type="file" name="image" />
     <br />
     <br />
     <input class="btn btn-primary" type="submit" value="Add product" />
